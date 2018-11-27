@@ -1,0 +1,16 @@
+function links(doc){
+    console.log('entre');
+    var arr = [], l = doc.links,b = [].slice.call(doc.links);
+   
+    for(var i=0; i<l.length; i++) {
+      arr.push(l[i].href);
+
+    }
+    return arr;
+}
+
+
+chrome.runtime.sendMessage({
+    action: "getSource",
+    source: links(document)
+});
