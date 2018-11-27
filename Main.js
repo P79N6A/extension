@@ -1,4 +1,5 @@
 
+//obtiene el mensaje de doc.js e invoca el metodo ui para cambiar el icono i el color de la extencion 
 chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
       console.log(request.source)
@@ -18,6 +19,8 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     }
   });
 
+ // resive un array con los lincks y dice si alguno de ellos no es seguro 
+
   function safe(arr){
     console.log('entre')
     var links = arr;
@@ -33,12 +36,14 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     return true; 
 }
 
+//resive un lick y lo busca en la lista return true si esta false si no 
 function check(url,i){
     url = url.match(/[\w\-]+(\.[\w\-]+)+/)[0];
     console.log(url)
     console.log(i)
     return window.top_sites.includes(url);
 }
+
 
 function ui(safe){
   if (safe){
@@ -84,7 +89,7 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
 */
 
-
+// executes the scrip doc.js
 function onWindowLoad() {
   var message = document.querySelector('#message');
   
@@ -101,4 +106,5 @@ function onWindowLoad() {
   console.log('entre')
 }
 
+//calls the function onwindowLoad when the window is loaded
 window.onload = onWindowLoad;
