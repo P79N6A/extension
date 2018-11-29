@@ -1,20 +1,4 @@
-chrome.runtime.onInstalled.addListener(function(details) {
-    console.log("Installed successfully!")
-});
-var message = document.querySelector('#message');
-// chrome.tabs.executeScript(null, {code:
-//     "document.body.appendChild(document.createElement('script')).src = 'psl.js';"
-// });
-// chrome.tabs.executeScript(null,{
-//   file: "psl.js"
-// }, function() {
-//   // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-//   if (chrome.runtime.lastError) {
-//     message.innerText = 'There was an error loading the domain parser script : \n' + chrome.runtime.lastError.message;
-//   }
-// });
-document.write('<script type="text/javascript" src="psl.js"></script>');
-// Obtains the message from doc.js and invokes the method to change the icon and color of the extension
+
 chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.action == "getSource") {
       console.log(request.source)
@@ -25,7 +9,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         text: gui["text"],
         //tabId: tab.id
       })
-
+    
       chrome.browserAction.setBadgeBackgroundColor({
         color: gui["color"],
         //tabId: tab.id
@@ -34,42 +18,27 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     }
   });
 
- // Recieves an array with the links and determines if it is not safe.
-
   function safe(arr){
-    console.log('start')
+    console.log('entre')
     var links = arr;
     console.log(links.length)
-
+    
     for(var i=0; i<links.length; i++) {
         if(!check(links[i],i)){
             console.log(links[i])
             return false;
         }
-
+      
     }
-    return true;
+    return true; 
 }
 
-// function cleanDomain(url)
-// {
-//     var regex = /^[^.\n]+\.[a-z]{2,63}$/gim;
-//     return regex.test(url);
-// }
-
-// Receives a link and looks for it in the js array returning true if it's there and false if it isn't
 function check(url,i){
-      link = new URL(url);
-      console.log(link);
-      var domain = link.hostname;
-      console.log(domain);
-    // tester = cleanDomain(url);
-    // console.log(tester);
-    checkedUrl = psl.parse(domain).domain;
+    url = url.match(/[\w\-]+(\.[\w\-]+)+/)[0];
+    console.log(url)
     console.log(i)
-    return window.top_sites.includes(checkedUrl);
+    return window.top_sites.includes(url);
 }
-
 
 function ui(safe){
   if (safe){
@@ -79,12 +48,12 @@ function ui(safe){
   }
 }
 
-/*a Supposed to be listener, not running or working
+/*
 chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
-
+ 
   if (info.status !== "complete"){
-    console.log('hello')
+    console.log('hola')
       return;
   }
 
@@ -98,7 +67,7 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
   });
 
 
-  console.log('entered')
+  console.log('entre')
   var gui = ui(link(document))
 
   chrome.browserAction.setBadgeText({
@@ -115,9 +84,10 @@ chrome.tabs.onUpdated.addListener(function(id, info, tab){
 
 */
 
-// Executes the script doc.js
-function onWindowLoad() {
 
+function onWindowLoad() {
+  var message = document.querySelector('#message');
+  
   chrome.tabs.executeScript(null, {
     file: "doc.js"
   }, function() {
@@ -127,7 +97,8 @@ function onWindowLoad() {
     }
   });
 
+  //message.innerText = DOMtoString(document)
+  console.log('entre')
 }
 
-// Calls the function onwindowLoad once the window is loaded
 window.onload = onWindowLoad;
