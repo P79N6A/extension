@@ -1,23 +1,24 @@
 {
-    "name": "phishBuster",
-    "version": "1.0",
-    "description": "Protects the user from visiting potential phishing sites!",
-    "manifest_version": 2,
-    "background": {
-      "scripts": [
-	  "top-sites.js",
-    "Main.js"],
-      "persistent": false
-    },
-	"content_scripts": [
-      {
-     "matches": ["<all_urls>"],
-     "js": ["doc.js","psl.js"]
-      }
+  "name": "phishBuster",
+  "version": "1.0",
+  "description": "Protects the user from visiting potential phishing sites!",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+  "top-sites.js",
+  "Main.js"
     ],
+    "persistent": false
+  },
+"content_scripts": [
+    {
+   "matches": ["<all_urls>"],
+   "js": ["doc.js","psl.js"]
+    }
+  ],
 
-    "browser_action": {
-      "default_popup": "popup.html"
-    },
-    "permissions": ["<all_urls>","tabs"]
- }
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["<all_urls>"]
+}
