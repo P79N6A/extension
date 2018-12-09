@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html style=''>
-<head>
-    <script src='Main.js'></script>
-    <script src='top-sites.js'></script>
-</head>
-<body style="width:400px;">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc-4R3FBDGSpL9Sz0Z_1Q4LBaS8xFlmIe-7cLSC6ZHagaUKcw/viewform?embedded=true" width="500" height="815" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
-</body>
+<!-- Chrome extension popup, contains button for highlighting unsafe links as well as button for reporting to developers -->
 
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src='Main.js'></script>
+        <script src='top-sites.js'></script>
+        <script src="popup.js"></script>
+        <link rel="stylesheet" href="popup.css">
+    </head>
+    <body style="width:400px;">
+        <button id="contactShower" type="button">Send a report to developers</button>
+        <div id="iframeLoad" style="overflow:auto"></div>
+        <button id="highlightButton" type="button">Highlight bad links</button>
+    </body>
 </html>
